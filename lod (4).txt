@@ -7,7 +7,7 @@ local supportedGames = {
     ["122678592501168"] = "https://raw.githubusercontent.com/m00ndiety/Steal-a-baddie/refs/heads/main/e986dcae0fa02e93.lua.txt", -- Beaks
     ["2474168535"] = "https://raw.githubusercontent.com/m00ndiety/Steal-a-baddie/refs/heads/main/e986dcae0fa02e93.lua.txt", -- Westbound
 
-["7709344486"] = "https://raw.githubusercontent.com/goondiety/Default/refs/heads/main/keysys", -- Steal a Brainrot
+["7709344486"] = "https://raw.githubusercontent.com/hash0tobash8/buz/refs/heads/main/keysys%20(6).txt", -- Steal a Brainrot
 
 ["7436755782"] = "https://raw.githubusercontent.com/m00ndiety/Steal-a-baddie/refs/heads/main/e986dcae0fa02e93.lua.txt", -- Grow a Garden
 }
