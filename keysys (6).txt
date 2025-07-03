@@ -9,7 +9,7 @@ local finalScripts = {
    ["2753915549"] = "https://raw.githubusercontent.com/hash0tobash8/Repo/refs/heads/main/bfff", -- Blox Fruits
    ["122678592501168"] = "https://raw.githubusercontent.com/hash0tobash8/Repo/refs/heads/main/bee", -- Beaks
    ["2474168535"] = "https://raw.githubusercontent.com/hash0tobash8/Repo/refs/heads/main/wb", -- Westbound
-,["7709344486"] = "https://raw.githubusercontent.com/hash0tobash8/Repo/refs/heads/main/br", -- Steal a Brainrot
+,["7709344486"] = "https://raw.githubusercontent.com/hash0tobash8/sab/refs/heads/main/Idk%20(7).txt", -- Steal a Brainrot
    ["7436755782"] = "https://raw.githubusercontent.com/hash0tobash8/Repo/refs/heads/main/gag" -- Grow a Garden ✅ fixed
 }
 
