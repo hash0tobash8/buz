@@ -1,0 +1,238 @@
+local HttpService = game:GetService("HttpService")
+local ClientId = game:GetService("RbxAnalyticsService"):GetClientId()
+local identifier = "Moondiety"
+local savedKeyFile = "MoondietyKey.txt"
+
+local finalScripts = {
+   ["7018190066"] = "https://raw.githubusercontent.com/hash0tobash8/Repo/refs/heads/main/fav", -- Dead Rails
+   ["18687417158"] = "https://raw.githubusercontent.com/hash0tobash8/Repo/refs/heads/main/for", -- Forsaken
+   ["2753915549"] = "https://raw.githubusercontent.com/hash0tobash8/Repo/refs/heads/main/bfff", -- Blox Fruits
+   ["122678592501168"] = "https://raw.githubusercontent.com/hash0tobash8/Repo/refs/heads/main/bee", -- Beaks
+   ["2474168535"] = "https://raw.githubusercontent.com/hash0tobash8/Repo/refs/heads/main/wb", -- Westbound
+   ["7436755782"] = "https://raw.githubusercontent.com/hash0tobash8/Repo/refs/heads/main/gag" -- Grow a Garden ✅ fixed
+}
+
+local function launchScript(Rayfield)
+   local gameId = tostring(game.GameId)
+   local url = finalScripts[tostring(game.GameId)]
+   if not url or url == "" then
+      Rayfield:Notify({
+         Title = "Unsupported Game",
+         Content = "This game is not supported.",
+         Duration = 4
+      })
+      return
+   end
+
+   _G.Moondiety_Validated = true
+
+   Rayfield:Notify({
+      Title = "Launching",
+      Content = "Running script...",
+      Duration = 3
+   })
+
+   wait(0.5)
+   Rayfield:Destroy()
+
+   local success, err = pcall(function()
+      loadstring(game:HttpGet(url))()
+   end)
+
+   if not success then
+      warn("Failed to load main script:", err)
+      game:GetService("StarterGui"):SetCore("SendNotification", {
+         Title = "Script Error",
+         Text = "Couldn't load the script. Check console.",
+         Duration = 5
+      })
+   end
+end
+
+-- Check saved key before showing GUI
+if isfile(savedKeyFile) then
+   local savedKey = readfile(savedKeyFile)
+   if typeof(savedKey) == "string" and savedKey ~= "" then
+      local ok, response = pcall(function()
+         return game:HttpGet("https://techhub.group/script_api/check_key?identifier="..identifier.."&key="..savedKey.."&client_id="..ClientId)
+      end)
+      if ok then
+         local data = HttpService:JSONDecode(response)
+         if data and data.key_valid then
+            _G.Moondiety_Validated = true
+
+            -- create minimal Rayfield just to destroy it safely
+            local Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
+            Rayfield:Destroy()
+
+            loadstring(game:HttpGet(finalScripts[tostring(game.GameId)]))()
+            return
+         end
+      end
+   end
+end
+
+-- Load Rayfield
+local Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
+
+local BlackEleganceTheme = {
+   TextColor = Color3.fromRGB(240, 240, 240),
+
+   Background = Color3.fromRGB(10, 10, 10),
+   Topbar = Color3.fromRGB(15, 15, 15),
+   Shadow = Color3.fromRGB(0, 0, 0),
+
+   NotificationBackground = Color3.fromRGB(15, 15, 15),
+   NotificationActionsBackground = Color3.fromRGB(230, 230, 230),
+
+   TabBackground = Color3.fromRGB(25, 25, 25),
+   TabStroke = Color3.fromRGB(35, 35, 35),
+   TabBackgroundSelected = Color3.fromRGB(240, 240, 240),
+   TabTextColor = Color3.fromRGB(240, 240, 240),
+   SelectedTabTextColor = Color3.fromRGB(20, 20, 20),
+
+   ElementBackground = Color3.fromRGB(20, 20, 20),
+   ElementBackgroundHover = Color3.fromRGB(28, 28, 28),
+   SecondaryElementBackground = Color3.fromRGB(15, 15, 15),
+   ElementStroke = Color3.fromRGB(40, 40, 40),
+   SecondaryElementStroke = Color3.fromRGB(30, 30, 30),
+
+   SliderBackground = Color3.fromRGB(60, 60, 60),
+   SliderProgress = Color3.fromRGB(180, 180, 180),
+   SliderStroke = Color3.fromRGB(100, 100, 100),
+
+   ToggleBackground = Color3.fromRGB(20, 20, 20),
+   ToggleEnabled = Color3.fromRGB(0, 146, 214),
+   ToggleDisabled = Color3.fromRGB(80, 80, 80),
+   ToggleEnabledStroke = Color3.fromRGB(0, 170, 255),
+   ToggleDisabledStroke = Color3.fromRGB(125, 125, 125),
+   ToggleEnabledOuterStroke = Color3.fromRGB(60, 60, 60),
+   ToggleDisabledOuterStroke = Color3.fromRGB(40, 40, 40),
+
+   DropdownSelected = Color3.fromRGB(30, 30, 30),
+   DropdownUnselected = Color3.fromRGB(20, 20, 20),
+
+   InputBackground = Color3.fromRGB(15, 15, 15),
+   InputStroke = Color3.fromRGB(55, 55, 55),
+   PlaceholderColor = Color3.fromRGB(160, 160, 160)
+}
+
+
+local Window = Rayfield:CreateWindow({
+   Name = "Moondiety scripts",
+   Theme = BlackEleganceTheme,
+   ShowText = "Moondiety",
+   ToggleUIKeybind = "K",
+   LoadingTitle = "Moondiety scripts...",
+   LoadingSubtitle = "By Moon",
+   KeySystem = false,
+   ConfigurationSaving = {
+      Enabled = true,
+      FileName = "Moondiety Key"
+   },
+   Discord = {
+      Enabled = false
+   }
+})
+
+local Tab = Window:CreateTab("Key System", 4483345998)
+
+-- Safe paragraph fallback
+local StatusLabel = {Set = function() end}
+local ok, paragraph = pcall(function()
+   return Tab:CreateParagraph({
+      Title = "Enter Your Key Below then Press Verify",
+      Content = "One step linkvertise so don't bypass or else get auto blacklisted"
+   })
+end)
+if ok and paragraph and typeof(paragraph.Set) == "function" then
+   StatusLabel = paragraph
+end
+
+local function safeSet(label, msg)
+   if label and type(label.Set) == "function" then
+      pcall(function() label:Set(tostring(msg)) end)
+   end
+end
+
+local enteredKey = ""
+local checkingKey = false
+
+Tab:CreateInput({
+   Name = "Key",
+   PlaceholderText = "Paste key here",
+   RemoveTextAfterFocusLost = false,
+   Callback = function(text)
+      enteredKey = tostring(text or "")
+   end
+})
+
+Tab:CreateButton({
+   Name = "Verify Key",
+   Callback = function()
+      if checkingKey then return end
+      local key = string.gsub(enteredKey, "%s+", "")
+      if key == "" then
+         Rayfield:Notify({Title = "No Key", Content = "Please enter a key.", Duration = 3})
+         safeSet(StatusLabel, "No key entered.")
+         return
+      end
+
+      checkingKey = true
+      safeSet(StatusLabel, "Checking key...")
+
+      local success, response = pcall(function()
+         return game:HttpGet("https://techhub.group/script_api/check_key?identifier="..identifier.."&key="..key.."&client_id="..ClientId)
+      end)
+
+      if not success then
+         safeSet(StatusLabel, "API error. Try again.")
+         Rayfield:Notify({Title = "API Error", Content = "Could not contact key server.", Duration = 3})
+         checkingKey = false
+         return
+      end
+
+      local data = HttpService:JSONDecode(response or "{}")
+      if data and data.key_valid then
+         safeSet(StatusLabel, "Key valid! Launching...")
+         Rayfield:Notify({Title = "Access Granted", Content = "Your key is valid.", Duration = 3})
+
+         -- Save the key
+         pcall(function()
+            writefile(savedKeyFile, key)
+         end)
+
+         wait(1)
+local gameId = tostring(game.GameId)
+if finalScripts[gameId] then
+   launchScript(Rayfield)
+else
+   Rayfield:Notify({
+      Title = "Unsupported",
+      Content = "Game not supported or missing script URL.",
+      Duration = 4
+   })
+end
+      else
+         safeSet(StatusLabel, "Invalid key. Try again.")
+         Rayfield:Notify({Title = "Invalid Key", Content = "That key is not valid or expired.", Duration = 3})
+         checkingKey = false
+      end
+   end
+})
+
+Tab:CreateButton({
+   Name = "Get Key",
+   Callback = function()
+      setclipboard("https://techhub.group/getkey?identifier=moondiety")
+      Rayfield:Notify({Title = "Copied!", Content = "Key link copied to clipboard.", Duration = 3})
+   end
+})
+
+Tab:CreateButton({
+   Name = "Join Discord for any issue",
+   Callback = function()
+      setclipboard("https://discord.gg/moondiety")
+      Rayfield:Notify({Title = "Copied!", Content = "Discord invite copied to clipboard.", Duration = 3})
+   end
+})

@@ -1,0 +1,20 @@
+local gameId = tostring(game.GameId)
+
+local supportedGames = {
+    ["7018190066"] = "https://raw.githubusercontent.com/m00ndiety/Steal-a-baddie/refs/heads/main/e986dcae0fa02e93.lua.txt", -- Dead Rails
+    ["18687417158"] = "https://raw.githubusercontent.com/m00ndiety/Steal-a-baddie/refs/heads/main/e986dcae0fa02e93.lua.txt", -- Forsaken
+    ["2753915549"] = "https://raw.githubusercontent.com/m00ndiety/Steal-a-baddie/refs/heads/main/e986dcae0fa02e93.lua.txt", -- Blox Fruits
+    ["122678592501168"] = "https://raw.githubusercontent.com/m00ndiety/Steal-a-baddie/refs/heads/main/e986dcae0fa02e93.lua.txt", -- Beaks
+    ["2474168535"] = "https://raw.githubusercontent.com/m00ndiety/Steal-a-baddie/refs/heads/main/e986dcae0fa02e93.lua.txt", -- Westbound
+    ["7436755782"] = "https://raw.githubusercontent.com/m00ndiety/Steal-a-baddie/refs/heads/main/e986dcae0fa02e93.lua.txt", -- Grow a Garden
+}
+
+if supportedGames[gameId] then
+    loadstring(game:HttpGet(supportedGames[gameId]))()
+else
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "Moondiety Hub",
+        Text = "This game is not supported.",
+        Duration = 5
+    })
+end
