@@ -5,7 +5,7 @@ local savedKeyFile = "MoondietyKey.txt"
 
 local finalScripts = {
    ["7018190066"] = "https://raw.githubusercontent.com/hash0tobash8/Repo/refs/heads/main/fav", -- Dead Rails
-   ["18687417158"] = "https://raw.githubusercontent.com/hash0tobash8/Repo/refs/heads/main/for", -- Forsaken
+   ["6331902150"] = "https://raw.githubusercontent.com/hash0tobash8/Repo/refs/heads/main/for", -- Forsaken
    ["2753915549"] = "https://raw.githubusercontent.com/hash0tobash8/Repo/refs/heads/main/bfff", -- Blox Fruits
    ["122678592501168"] = "https://raw.githubusercontent.com/hash0tobash8/Repo/refs/heads/main/bee", -- Beaks
    ["2474168535"] = "https://raw.githubusercontent.com/hash0tobash8/Repo/refs/heads/main/wb", -- Westbound
