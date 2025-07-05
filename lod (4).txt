@@ -2,7 +2,7 @@ local gameId = tostring(game.GameId)
 
 local supportedGames = {
     ["7018190066"] = "https://raw.githubusercontent.com/m00ndiety/Steal-a-baddie/refs/heads/main/e986dcae0fa02e93.lua.txt", -- Dead Rails
-    ["18687417158"] = "https://raw.githubusercontent.com/m00ndiety/Steal-a-baddie/refs/heads/main/e986dcae0fa02e93.lua.txt", -- Forsaken
+    ["6331902150"] = "https://raw.githubusercontent.com/m00ndiety/Steal-a-baddie/refs/heads/main/e986dcae0fa02e93.lua.txt", -- Forsaken
     ["2753915549"] = "https://raw.githubusercontent.com/m00ndiety/Steal-a-baddie/refs/heads/main/e986dcae0fa02e93.lua.txt", -- Blox Fruits
     ["122678592501168"] = "https://raw.githubusercontent.com/m00ndiety/Steal-a-baddie/refs/heads/main/e986dcae0fa02e93.lua.txt", -- Beaks
     ["2474168535"] = "https://raw.githubusercontent.com/m00ndiety/Steal-a-baddie/refs/heads/main/e986dcae0fa02e93.lua.txt", -- Westbound
